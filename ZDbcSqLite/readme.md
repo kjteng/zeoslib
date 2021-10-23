@@ -18,7 +18,7 @@ I have added a few lines to the original ZDBSlite.pas (zeoslib7.2.14) file i.e. 
    You can replace 'chacha20' with 'aes256cbc', 'aes128cbc', 'sqlcipher' or 'rc4' as desired
   
   
-3. To changing password (after step 1 above):
+3. To change password (after step 1 above):
       ZConnection1.ExecuteDirect('PRAGMA rekey =' + QuotedStr(pw)); //pw is a string variable containing you new password    
      
            
