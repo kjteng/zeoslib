@@ -20,7 +20,7 @@ I have added a few lines to the original ZDBSlite.pas (zeoslib7.2.14) file i.e. 
   
 3. To changing password (after step 1 above):
       ZConnection1.ExecuteDirect('PRAGMA rekey =' + QuotedStr(pw)); //pw is a string variable containing you new password    
-      //use ZConnection1.ExecuteDirect('PRAGMA key =' + QuotedStr(pw)) for new database that has not encrypted with password yet
+     
            
 
 ***********************************************************************************
