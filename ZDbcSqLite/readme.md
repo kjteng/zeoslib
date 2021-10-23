@@ -1,8 +1,8 @@
 Patched ZDBSqlite.pas so as to enabled encrytion/decryption using wxSqlite3mc
 ******************************************************************************
 
-Thanks to marsupilam (https://github.com/marsupilami79/zeoslib) guidance in solving my problem. My patch would not be
-possible without the advice form master marsupilam.
+Many thanks to marsupilam (https://github.com/marsupilami79/zeoslib) guidance in solving my problem. This patch would not 
+be possible without the advice from master marsupilam.
 
 I have added a few lines to the original ZDBSlite.pas (zeoslib7.2.14) file i.e. lines 360-361, 377-381
 
