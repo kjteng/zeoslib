@@ -494,18 +494,30 @@ begin
   S := Info.Values['Cipher'];
   if S > '' then  // use wxSqlite3mc if Cipher is specified
     begin                                                  
-      {
-      Stmt := TZSQLiteStatement.Create(GetPlainDriver, Self, Info, FHandle)
-                 as IZStatement; // <-- Note the IZStatement interface here
-   //   Stmt.ExecuteUpdate('PRAGMA cipher=' +QuotedStr(S));
-      Stmt.ExecuteUpdate('PRAGMA key='+ QuotedStr(password));}
       ExecuteImmediat('PRAGMA cipher=' +QuotedStr(S), lcExecute);
       ExecuteImmediat('PRAGMA key='+ QuotedStr(password), lcExecute);
-// ExecuteImmediat('PRAGMA key='+ QuotedStr(s+':'+password), lcExecute);
+      { for zeoslib 7.2
+      Stmt := TZSQLiteStatement.Create(GetPlainDriver, Self, Info, FHandle)
+                 as IZStatement; // <-- Note the IZStatement interface here
+      Stmt.ExecuteUpdate('PRAGMA cipher=' +QuotedStr(S));
+      Stmt.ExecuteUpdate('PRAGMA key='+ QuotedStr(password));}
     end
   else
     if Password > ''  then
-      ExecuteImmediat('PRAGMA key='+ QuotedStr(password), lcExecute)
+      begin  //for sqlite SEE
+        ExecuteImmediat('PRAGMA activate_extensions='
+                             +QuotedStr('see-7bb07b8d471d642e'), lcExecute);
+        S := lowercase(Info.Values['keyfmt']);
+        if (S <> 'hexkey') and (S<>'textkey') then s := 'key';
+        ExecuteImmediat('PRAGMA '+ S + '='+ QuotedStr(password), lcExecute)
+        { for zeoslib 7.2
+        Stmt := TZSQLiteStatement.Create(GetPlainDriver, Self, Info, FHandle)
+                   as IZStatement; // <-- Note the IZStatement interface here
+        Stmt.ExecuteUpdate('PRAGMA activate_extensions='
+                                +QuotedStr('see-7bb07b8d471d642e'), lcExecute);
+        Stmt.ExecuteUpdate('PRAGMA '+ S + '='+ QuotedStr(password), lcExecute);
+        }
+      end
     else
       begin
         { Set busy timeout if requested }
