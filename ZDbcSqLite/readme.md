@@ -10,7 +10,7 @@ I have added a few lines to the original ZDBSlite.pas (zeoslib7.2.14) file i.e. 
    Assign the cipher and password properties before you open the connection, as follows:
       zConnection1.Properties.Values['Cipher'] := 'aes256cbc';  //if you are using SEE (not wx), leave Values['cipher'] to blank
       zConnection1.Password := 'Password';                     //if you are using SEE (not wx), set password to [cipher]:[passphrase] eg aes128:Mykey
-      zConnection1.Connect;
+      zConnection1.Connect;                                    //SEE: to use other password format, set zConnection1.Properties.Values['keyfmt'] to 'hexkey' or 'textkey' 
       
   
 2. To change Cipher (after step 1 above):
