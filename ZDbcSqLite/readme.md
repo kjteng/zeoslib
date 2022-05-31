@@ -8,7 +8,7 @@ I have added a few lines to the original ZDBSlite.pas (zeoslib7.2.14) file i.e. 
 
 1. To access an encrypted sqlite database, assign the cipher and password properties before you open the connection, as follows:
       zConnection1.Properties.Values['Cipher'] := 'aes256cbc';        
-      zConnection1.Password := 'Password'; 
+      zConnection1.Password := 'Password';
       zConnection1.Connect;
       
       // Values['Cipher'] can be: 'chacha20', 'aes128cbc', 'aes256cbc', 'sqlcipher' or 'rc4'
