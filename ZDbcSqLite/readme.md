@@ -4,7 +4,7 @@ Patched to ZDBSqlite.pas - to enable encrytion/decryption using wxSqlite3mc ('wx
 Many thanks to marsupilam (https://github.com/marsupilami79/zeoslib) guidance in solving my problem. This patch would not 
 be possible without the advice from master marsupilam.
 
-I have added a few lines to the original ZDBSlite.pas (zeoslib7.2.14) file i.e. lines 360-368
+I have added a few lines in the procedure TZSQLiteConnection.Open of the original ZDBSlite.pas (zeoslib7.2.14) file.
 
 1. To access an encrypted sqlite database, assign the cipher and password properties before you open the connection, as follows:
 
