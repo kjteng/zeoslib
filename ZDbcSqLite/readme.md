@@ -1,6 +1,6 @@
 Patched to ZDBSqlite.pas - to enable encrytion/decryption using wxSqlite3mc ('wx')
 ******************************************************************************
-            ZDBSqlite.pas -  for Zeoslib merged revision(s) 7863
+            ZDBSqlite.pas --  for Zeoslib merged revision(s) 7863
             ZDBSqlite2.pas -- for older version of Zeoslib
 
 Many thanks to marsupilam (https://github.com/marsupilami79/zeoslib) guidance in solving my problem. This patch would not 
