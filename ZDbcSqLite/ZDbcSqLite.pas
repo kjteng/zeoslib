@@ -498,7 +498,7 @@ begin
       ExecuteImmediat('PRAGMA key='+ QuotedStr(Password), lcExecute)
     end
   else
-    begin // NO encryption
+    begin // Other type of encryption
       if StrToBoolEx(Info.Values[ConnProps_Encrypted]) and Assigned(FPlainDriver.sqlite3_key) and (Password <> '') then
         begin
           SQL := {$IFDEF UNICODE}UTF8String{$ENDIF}(Password);
@@ -506,15 +506,14 @@ begin
           if TmpInt <> SQLITE_OK then
             HandleErrorOrWarning(lcConnect, TmpInt, 'SQLite.Key', IImmediatelyReleasable(FWeakImmediatRelPtr));
         end;
-      { Set busy timeout if requested }
-      TmpInt := StrToIntDef(Info.Values[ConnProps_BusyTimeout], -1);
-      if TmpInt >= 0 then
-        FPlainDriver.sqlite3_busy_timeout(FHandle, TmpInt);
-    end;
-    FUndefinedVarcharAsStringLength := StrToIntDef(Info.Values[DSProps_UndefVarcharAsStringLength], 0);
-    FSQLiteIntAffinity := StrToBoolEx(Info.Values[DSProps_SQLiteIntAffinity], false);
+    end;    
+   { Set busy timeout if requested }
+  TmpInt := StrToIntDef(Info.Values[ConnProps_BusyTimeout], -1);
+  if TmpInt >= 0 then
+    FPlainDriver.sqlite3_busy_timeout(FHandle, TmpInt);
+  FUndefinedVarcharAsStringLength := StrToIntDef(Info.Values[DSProps_UndefVarcharAsStringLength], 0);
+  FSQLiteIntAffinity := StrToBoolEx(Info.Values[DSProps_SQLiteIntAffinity], false);
   inherited Open;
-
   { pimp performance }
   ExecuteImmediat('PRAGMA cache_size = '+IntToRaw(StrToIntDef(Info.Values[ConnProps_CacheSize], 10000)), lcExecute);
 
